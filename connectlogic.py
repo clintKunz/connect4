@@ -113,7 +113,7 @@ def create_board_svg(board, radius):
         for column in range(columns):
             piece = board[row][column]
             color = piece_color_map[piece]
-            cx = column*diamter + radius
+            cx = column*diameter + radius
             cy = row*diameter + radius
             svg += '<circle cx="{}" cy="{}" r="{}" fill="{}"/>'.format(cx, cy, radius*.75, color)
 
@@ -127,11 +127,44 @@ def HumanPlayer(board, history, players):
     column = -1
 
     while column not in range(0, columns):
-        column = input('Which column? ')
+        column = int(input('Which column? '))
 
-        return column
+    return column
 
 def RandomPlayer(board, history, players):
     columns = len(board[0])
     return random.randint(0, columns - 1)
-    
+
+# Globals 
+Players = (piece_one, piece_two)
+History = []
+Board = create_board()
+Radius = 40
+Winner = None
+Tries = 0
+
+# Game loop
+while not Winner:
+    turn = len(History)
+
+    if turn % 2 == 0:
+        move = HumanPlayer(Board, History, Players)
+    else:
+        move = RandomPlayer(Board, History, Players)
+
+    if drop_piece(Board, move, Players[turn % 2]):
+        Tries = 0
+        History.append(move)
+
+    if Tries > 3:
+        print('Player {} is stuck!'.format((turn % 2) + 1))
+        break
+
+    clear_output()
+    display_html(create_board_svg(Board, Radius))
+
+    time.sleep(1)
+
+    Winner = find_winner(Board)
+
+print('The Winner is {}'.format(piece_color_map[Winner]))
