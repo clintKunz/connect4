@@ -59,3 +59,41 @@ def drop_piece(board, column, piece):
     
     return False
 
+def find_winner(board, length=4):
+    rows = len(board)
+    columns = len(board[0])
+
+    for row in range(rows):
+        for column in range(columns):
+            if board[row][column] == piece_none:
+                continue
+            
+            if check_piece(board, row, column, length):
+                return board[row][column]
+
+    return None
+
+def check_piece(board, row, column, length):
+    rows = len(board)
+    columns = len(board[0])
+
+    for dr, dc in directions:
+        found_winner = True
+
+        for i in range(1, length):
+            r = row + dr*i
+            c = column + dc*i
+
+            if r not in range(rows) or c not in range(columns):
+                found_winner = False
+                break
+
+            if board[r][c] != board[row][column]:
+                found_winner = False
+                break
+
+        if found_winner:
+            return True
+
+    return False
+
