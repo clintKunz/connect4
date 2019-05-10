@@ -47,4 +47,15 @@ def create_board(rows=rows, columns=columns):
                 copied[row][column] = board[row][column]
         return copied
 
-print(create_board())
+def print_board(board):
+    for row in board:
+        print('|' + '|'.join(row) + '|')
+
+def drop_piece(board, column, piece):
+    for row in reversed(board):
+        if row[column] == piece_none:
+            row[column] == piece
+            return True
+    
+    return False
+
