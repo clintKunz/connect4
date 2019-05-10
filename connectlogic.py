@@ -1,6 +1,6 @@
 # initial game logic source - https://www3.nd.edu/~pbui/teaching/cdt.30010.fa16/project01.html
 
-# from IPython.display import display, HTML, clear_output
+from IPython.display import display, HTML, clear_output
 import random
 import time
 
@@ -97,3 +97,26 @@ def check_piece(board, row, column, length):
 
     return False
 
+# HTML functions
+def display_html(s):
+    display(HTML(s))
+
+def create_board_svg(board, radius):
+    rows =  len(board)
+    columns = len(board[0])
+    diameter = 2*radius
+
+    svg = '<svg height="{}" width="{}">'.format(rows*diameter, columns*diameter)
+    svg += '<rect width="100%" height="100%" fill="blue"/>'
+
+    for row in range(rows):
+        for column in range(columns):
+            piece = board[row][column]
+            color = piece_color_map[piece]
+            cx = column*diamter + radius
+            cy = row*diameter + radius
+            svg += '<circle cx="{}" cy="{}" r="{}" fill="{}"/>'.format(cx, cy, radius*.75, color)
+
+    svg += '</svg>'
+
+    return svg
