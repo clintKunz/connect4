@@ -120,3 +120,18 @@ def create_board_svg(board, radius):
     svg += '</svg>'
 
     return svg
+
+# human and random players
+def HumanPlayer(board, history, players):
+    columns = len(board[0])
+    column = -1
+
+    while column not in range(0, columns):
+        column = input('Which column? ')
+
+        return column
+
+def RandomPlayer(board, history, players):
+    columns = len(board[0])
+    return random.randint(0, columns - 1)
+    
