@@ -33,15 +33,32 @@ const Player = styled.h3`
   border: 1px solid blue; 
 `;
 
+const ClickArea = styled.div`
+  width: 60%;
+  height: 50px;  
+  margin: 0 auto; 
+`;
+
+const PickColumn = styled.div`
+  display: flex; 
+  justify-content: space-around; 
+  background-color: green;
+  width: 100%; 
+  height: 100%;
+  
+  &:hover {
+    cursor: pointer; 
+  }
+`;
+
 const Board = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center; 
   width: 60%; 
-  margin: 30px auto; 
+  margin: 0 auto 30px; 
 `;
 
 const Row = styled.div`
+  display: flex; 
+  justify-content: space-around; 
   background-color: yellow;
   width: 100%; 
 `;
@@ -59,7 +76,8 @@ class App extends React.Component {
       player1: 1,
       player2: 2,
       turn: true,
-      board: []
+      board: [],
+      columns: [0,1,2,3,4,5,6]
     }
   }
 
@@ -80,6 +98,20 @@ class App extends React.Component {
     })
   }
 
+  play = column => {
+    let board = this.state.board;
+    for (let r = 5; r >= 0; r--) {
+      if(board[r][column] === null) {
+        board[r][column] = this.state.turn;
+        break
+      }
+    }
+    this.setState({
+      board,
+      turn: !this.state.turn
+    })
+  }
+
   render() {
     return (
       <Container>
@@ -94,11 +126,22 @@ class App extends React.Component {
             {!this.state.turn? <div>Your Turn</div>: null}
           </div>
         </Player>
+        <ClickArea>
+          <PickColumn>
+            {this.state.columns.map(column => 
+              <Cell
+                onClick={e => this.play(column)}
+              >
+                {column}
+              </Cell>
+            )}
+          </PickColumn>
+        </ClickArea>
         <Board>
           {this.state.board.map(row => (
             <Row>
             {row.map(cell => (
-              <Cell>{cell === null? 'e' : cell === 1? 'x': 'o'}</Cell>
+              <Cell>{cell === null? 'e' : cell === true? 'x': 'o'}</Cell>
             ))}
             </Row>
           ))}
