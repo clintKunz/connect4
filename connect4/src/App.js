@@ -46,6 +46,7 @@ const PickColumn = styled.div`
   justify-content: space-around; 
   width: 100%; 
   height: 100%;
+  color: white; 
 `;
 
 const Cell = styled.div`
@@ -56,7 +57,7 @@ const Cell = styled.div`
   width: 100%; 
   &:hover {
     cursor: pointer;
-    background-color: blue; 
+    background-color: black; 
   }
 `;
 
@@ -241,6 +242,7 @@ class App extends React.Component {
                     key={column}
                     onClick={e => this.play(column)}
                   >
+                  Drop
                   </Cell>
                 )}
               </PickColumn>
