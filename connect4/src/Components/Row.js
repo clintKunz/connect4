@@ -6,7 +6,7 @@ import CellComponent from './Cell';
 const Row = styled.div`
   display: flex; 
   justify-content: space-around; 
-  background-color: yellow;
+  height: 50px; 
   width: 100%; 
 `;
 
