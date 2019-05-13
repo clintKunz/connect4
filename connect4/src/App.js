@@ -14,6 +14,17 @@ const Header = styled.h1`
   color: blue;
 `;
 
+const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 1px solid red; 
+  width: 100px; 
+  margin: 0 auto; 
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const Player = styled.h3`
   display: flex; 
   justify-content: space-between; 
@@ -53,6 +64,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.initializeBoard()
+  }
+
+  initializeBoard = () => {
     let board = [];
     for (let r = 0; r < 6; r++) {
       let row = [];
@@ -88,6 +103,7 @@ class App extends React.Component {
             </Row>
           ))}
         </Board>
+        <Button onClick={this.initializeBoard}>Reset Game</Button>
       </Container>
     );
   }
