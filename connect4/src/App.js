@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import RowComponent from './Components/Row';
 
 const Container = styled.div`
-  border: 1px solid red; 
   min-width: 400px; 
-  max-width: 1100px;
+  max-width: 700px;
   width: 100%; 
+  margin: 30px auto; 
 `;
 
 const Header = styled.h1`
@@ -18,11 +18,11 @@ const Header = styled.h1`
 const Button = styled.div`
   display: flex;
   justify-content: center;
-  border: 1px solid red; 
   width: 100px; 
   margin: 0 auto; 
   &:hover {
     cursor: pointer;
+    background-color: blue; 
   }
 `;
 
@@ -30,8 +30,7 @@ const Player = styled.h3`
   display: flex; 
   justify-content: space-between; 
   width: 60%;
-  margin: 0 auto; 
-  border: 1px solid blue; 
+  margin: 20px auto; 
 `;
 
 const ClickArea = styled.div`
@@ -210,11 +209,11 @@ class App extends React.Component {
         <Header>Connect 4!</Header> 
         <Player>
           <div style={{color: 'red'}}>
-            X
+            Player 1 (x)
             {this.state.turn? <div>Your Turn</div>: null}
           </div>
           <div style={{color: 'green'}}>
-            O
+            Player 2 (o)
             {this.state.turn !== null && !this.state.turn? <div>Your Turn</div>: null}
           </div>
         </Player>
