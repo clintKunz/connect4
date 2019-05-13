@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import RowComponent from './Components/Row';
 
 const Container = styled.div`
   border: 1px solid red; 
@@ -51,23 +52,17 @@ const PickColumn = styled.div`
   }
 `;
 
-const Board = styled.div`
-  width: 60%; 
-  margin: 0 auto 30px; 
-`;
-
-const Row = styled.div`
-  display: flex; 
-  justify-content: space-around; 
-  background-color: yellow;
-  width: 100%; 
-`;
-
 const Cell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center; 
 `;
+
+const Board = styled.div`
+  width: 60%; 
+  margin: 0 auto 30px; 
+`;
+
 
 class App extends React.Component {
   constructor(props) {
@@ -233,6 +228,7 @@ class App extends React.Component {
               <PickColumn>
                 {this.state.columns.map(column => 
                   <Cell
+                    key={column}
                     onClick={e => this.play(column)}
                   >
                     {column}
@@ -242,11 +238,7 @@ class App extends React.Component {
             </ClickArea>
             <Board>
               {this.state.board.map(row => (
-                <Row>
-                {row.map(cell => (
-                  <Cell>{cell === null? 'e' : cell === 1? 'x': 'o'}</Cell>
-                ))}
-                </Row>
+                <RowComponent row={row} />
               ))}
             </Board>
           </>
