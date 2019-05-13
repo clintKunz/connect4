@@ -1,0 +1,4 @@
+[build]
+base="connect4"
+command="yarn build"
+publish="connect4/build/"
