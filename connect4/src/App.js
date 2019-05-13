@@ -45,14 +45,19 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      player1: 1,
-      player2: 2,
+      player1: 'player1',
+      player2: 'player2',
       turn: true,
-      board: []
+      board: [],
+      edit: false
     }
   }
 
   componentDidMount() {
+    this.initializeBoard()
+  }
+
+  initializeBoard = () => {
     let board = [];
     for (let r = 0; r < 6; r++) {
       let row = [];
@@ -65,17 +70,47 @@ class App extends React.Component {
     })
   }
 
+  handler = e => {
+    e.preventDefault()
+    console.log(e)
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   render() {
     return (
       <Container>
         <Header>Connect 4!</Header> 
         <Player>
           <div style={{color: 'red'}}>
-            Player 1
+            <div onClick={() => this.setState({edit: true})}>
+              {!this.state.edit? 
+                this.state.player1 
+                : 
+                <input 
+                  onChange={this.handler} 
+                  value={this.state.player1} 
+                  name='player1' 
+                  onKeyDown={e => e.keyCode === 13? this.setState({edit: false}): null}
+                />
+              }
+            </div>
             {this.state.turn? <div>Your Turn</div>: null}
           </div>
           <div style={{color: 'green'}}>
-            Player 2
+            <div onClick={() => this.setState({edit: true})}>
+              {!this.state.edit? 
+                this.state.player2 
+                : 
+                <input 
+                  onChange={this.handler} 
+                  value={this.state.player2} 
+                  name='player2' 
+                  onKeyDown={e => e.keyCode === 13? this.setState({edit: false}): null}
+                />
+              }
+            </div>
             {!this.state.turn? <div>Your Turn</div>: null}
           </div>
         </Player>
