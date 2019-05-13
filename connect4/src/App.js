@@ -97,7 +97,9 @@ class App extends React.Component {
 
     this.setState({
       board,
-      gameOver: false
+      gameOver: false,
+      turn: true,
+      currentPlayer: 1
     })
   }
 
@@ -120,9 +122,17 @@ class App extends React.Component {
       turn: !this.state.turn,
       currentPlayer: newCurrentPlayer
     })
+    if(this.checkWinner() === 'draw') {
+      this.setState({
+        gameOver:true,
+        currentPlayer: 3,
+        turn: null
+      })
+    }
     if(this.checkWinner() !== null) {
       this.setState({
-        gameOver: true
+        gameOver: true,
+        turn: null
       })
     }
   }
@@ -210,34 +220,36 @@ class App extends React.Component {
           </div>
           <div style={{color: 'green'}}>
             O
-            {!this.state.turn? <div>Your Turn</div>: null}
+            {this.state.turn !== null && !this.state.turn? <div>Your Turn</div>: null}
           </div>
         </Player>
-        <ClickArea>
-          <PickColumn>
-            {this.state.columns.map(column => 
-              <Cell
-                onClick={e => this.play(column)}
-              >
-                {column}
-              </Cell>
-            )}
-          </PickColumn>
-        </ClickArea>
         {this.state.gameOver? (
-          <div>game over!</div>
+          <Board>{this.state.currentPlayer === 3? 'Draw!' : this.state.currentPlayer === 1? 'Player 2 Wins!': 'Player 1 Wins'}</Board>
         )
         : 
         (
-          <Board>
-            {this.state.board.map(row => (
-              <Row>
-              {row.map(cell => (
-                <Cell>{cell === null? 'e' : cell === 1? 'x': 'o'}</Cell>
+          <>
+            <ClickArea>
+              <PickColumn>
+                {this.state.columns.map(column => 
+                  <Cell
+                    onClick={e => this.play(column)}
+                  >
+                    {column}
+                  </Cell>
+                )}
+              </PickColumn>
+            </ClickArea>
+            <Board>
+              {this.state.board.map(row => (
+                <Row>
+                {row.map(cell => (
+                  <Cell>{cell === null? 'e' : cell === 1? 'x': 'o'}</Cell>
+                ))}
+                </Row>
               ))}
-              </Row>
-            ))}
-          </Board>
+            </Board>
+          </>
         )}
         <Button onClick={this.initializeBoard}>Reset Game</Button>
       </Container>
