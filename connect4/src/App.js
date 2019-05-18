@@ -6,6 +6,7 @@ const Container = styled.div`
   min-width: 400px; 
   max-width: 700px;
   width: 100%; 
+  height: 80vh; 
   margin: 30px auto; 
 `;
 
@@ -20,9 +21,10 @@ const Button = styled.div`
   justify-content: center;
   width: 100px; 
   margin: 0 auto; 
+  padding: 10px 0;
   &:hover {
     cursor: pointer;
-    background-color: blue; 
+    background-color: grey; 
   }
 `;
 
@@ -35,7 +37,7 @@ const Player = styled.h3`
 
 const ClickArea = styled.div`
   width: 60%;
-  height: 50px;  
+  height: 50px;
   margin: 0 auto; 
 `;
 
@@ -46,10 +48,7 @@ const PickColumn = styled.div`
   background-color: green;
   width: 100%; 
   height: 100%;
-  
-  &:hover {
-    cursor: pointer; 
-  }
+  color: white; 
 `;
 
 const Cell = styled.div`
@@ -70,10 +69,18 @@ const Cell = styled.div`
 `;
 
 const Board = styled.div`
+  border: 3px solid blue; 
   width: 60%; 
+  height: 300px; 
   margin: 0 auto 30px; 
 `;
 
+const GameOver = styled.div`
+  font-size: 30px; 
+  color: blue; 
+  text-align: center;
+  margin: 20px 0; 
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -221,16 +228,16 @@ class App extends React.Component {
         <Header>Connect 4!</Header> 
         <Player>
           <div style={{color: 'red'}}>
-            Player 1 (x)
+            Player 1
             {this.state.turn? <div>Your Turn</div>: null}
           </div>
           <div style={{color: 'green'}}>
-            Player 2 (o)
+            Player 2 
             {this.state.turn !== null && !this.state.turn? <div>Your Turn</div>: null}
           </div>
         </Player>
         {this.state.gameOver? (
-          <Board>{this.state.currentPlayer === 3? 'Draw!' : this.state.currentPlayer === 1? 'Player 2 Wins!': 'Player 1 Wins'}</Board>
+          <GameOver>{this.state.currentPlayer === 3? 'Draw!' : this.state.currentPlayer === 1? 'Player 2 Wins!': 'Player 1 Wins'}</GameOver>
         )
         : 
         (
@@ -242,7 +249,7 @@ class App extends React.Component {
                     key={column}
                     onClick={e => this.play(column)}
                   >
-                    {column}
+                  Drop
                   </Cell>
                 )}
               </PickColumn>
