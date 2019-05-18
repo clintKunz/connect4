@@ -68,7 +68,6 @@ const Cell = styled.div`
 `;
 
 const Board = styled.div`
-  border: 3px solid blue; 
   width: 60%; 
   height: 300px; 
   margin: 0 auto 30px; 
