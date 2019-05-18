@@ -42,6 +42,7 @@ const ClickArea = styled.div`
 const PickColumn = styled.div`
   display: flex; 
   justify-content: space-around; 
+  align-items: center; 
   background-color: green;
   width: 100%; 
   height: 100%;
@@ -55,6 +56,17 @@ const Cell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center; 
+  height: 80%;
+  width: 80%;
+  background-color: white;
+  z-index: 2; 
+  border-radius: 50%; 
+  max-width: 40px; 
+  color: white; 
+
+  &:hover {
+    background-color: 
+  }
 `;
 
 const Board = styled.div`
