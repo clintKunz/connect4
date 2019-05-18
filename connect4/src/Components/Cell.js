@@ -7,7 +7,10 @@ const Cell = styled.div`
     justify-content: center;
     align-items: center;
     border: 1px solid blue; 
-    width: 100%;  
+    width: 40px;
+    height: 80%;
+    border-radius: 50%; 
+    background-color: white;  
 `;
 
 const RedCell = styled(Cell)`

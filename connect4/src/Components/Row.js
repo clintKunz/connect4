@@ -6,8 +6,10 @@ import CellComponent from './Cell';
 const Row = styled.div`
   display: flex; 
   justify-content: space-around; 
+  align-items: center; 
   height: 50px; 
-  width: 100%; 
+  width: 100%;
+  background-color: blue;  
 `;
 
 function RowComponent(props) {
